@@ -1,0 +1,16 @@
+@mixin mainButton {
+        padding: 1rem 3rem;
+        text-transform: uppercase;
+        letter-spacing: var(--mainSpacing);
+        font-size: 1rem;
+        background: var(--mainBlack);
+        color: var(--mainWhite);
+        transition: var(--mainTransition);
+        border:none;
+        cursor: pointer;
+        outline: none;
+        &:hover {
+          background: var(--primaryColor);
+          color: #fff;
+        }
+}

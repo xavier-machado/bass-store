@@ -3,40 +3,40 @@
     {
       "sys": { "id": "1" },
       "fields": {
-        "title": "queen panel bed",
-        "price": 10.99,
+        "title": "fender mustang bass pf, olympic white",
+        "price": 150,
         "image": { "fields": { "file": { "url": "./images/product-1.jpg" } } }
       }
     },
     {
       "sys": { "id": "2" },
       "fields": {
-        "title": "king panel bed",
-        "price": 12.99,
+        "title": "fender mustang bass pf, torino red",
+        "price": 200,
         "image": { "fields": { "file": { "url": "./images/product-2.jpg" } } }
       }
     },
     {
       "sys": { "id": "3" },
       "fields": {
-        "title": "single panel bed",
-        "price": 12.99,
+        "title": "fender american performer jazz bass mn, penny",
+        "price": 300,
         "image": { "fields": { "file": { "url": "./images/product-3.jpg" } } }
       }
     },
     {
       "sys": { "id": "4" },
       "fields": {
-        "title": "twin panel bed",
-        "price": 22.99,
+        "title": "fender fsr traditional 70s precision bass rw, arctic white",
+        "price": 100,
         "image": { "fields": { "file": { "url": "./images/product-4.jpg" } } }
       }
     },
     {
       "sys": { "id": "5" },
       "fields": {
-        "title": "fridge",
-        "price": 88.99,
+        "title": "fender deluxe active p bass special, mn, sunburst",
+        "price": 500,
         "image": { "fields": { "file": { "url": "./images/product-5.jpg" } } }
       }
     }

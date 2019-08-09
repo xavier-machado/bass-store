@@ -9,6 +9,7 @@ const cartItems = document.querySelector('.cart-items');
 const cartTotal = document.querySelector('.cart-total');
 const cartContent = document.querySelector('.cart-content');
 const productsDOM = document.querySelector('.products-center');
+const body = document.querySelector('body');
 
 // cart
 let cart = [];
@@ -87,7 +88,11 @@ class UI {
                 // display cart item
                 this.addCartItem(cartItem);
                 // show the cart
-                this.showCart();
+                // this.showCart();
+                // animation UNDER DEVELOPMENT
+                // let clonedElement = button.parentElement.cloneNode(true);
+                // body.appendChild(clonedElement);
+                // clonedElement.children[1].classList.add('zoom');
             })
         })
     }
@@ -115,9 +120,9 @@ class UI {
             <span class="remove-item" data-id=${item.id}>remove</span>
         </div>
         <div>
-            <i class="fas fa-chevron-up" data-id=${item.id}></i>
+            <i class="fas fa-plus" data-id=${item.id}></i>
             <p class="item-amount">${item.amount}</p>
-            <i class="fas fa-chevron-down" data-id=${item.id}></i>
+            <i class="fas fa-minus" data-id=${item.id}></i>
         </div>`;
         cartContent.appendChild(div);
     }
@@ -156,7 +161,7 @@ class UI {
                 let id = removeItem.dataset.id;
                 cartContent.removeChild(removeItem.parentElement.parentElement);
                 this.removeItem(id);
-            } else if (event.target.classList.contains("fa-chevron-up")) {
+            } else if (event.target.classList.contains("fa-plus")) {
                 let addAmount = event.target;
                 let id = addAmount.dataset.id;
                 let tempItem = cart.find(item => item.id === id);
@@ -164,7 +169,7 @@ class UI {
                 Storage.saveCart(cart);
                 this.setCartValues(cart);
                 addAmount.nextElementSibling.innerText = tempItem.amount;
-            } else if (event.target.classList.contains("fa-chevron-down")) {
+            } else if (event.target.classList.contains("fa-minus")) {
                 let lowerAmount = event.target;
                 let id = lowerAmount.dataset.id;
                 let tempItem = cart.find(item => item.id === id);
