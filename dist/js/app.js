@@ -1,5 +1,6 @@
 // DOM var's
 
+const navbarCenter = document.querySelector('.navbar')
 const cartBtn = document.querySelector('.cart-btn');
 const closeCartBtn = document.querySelector('.close-cart');
 const clearCartBtn = document.querySelector('.clear-cart');
@@ -89,10 +90,11 @@ class UI {
                 this.addCartItem(cartItem);
                 // show the cart
                 // this.showCart();
-                // animation UNDER DEVELOPMENT
-                // let clonedElement = button.parentElement.cloneNode(true);
-                // body.appendChild(clonedElement);
-                // clonedElement.children[1].classList.add('zoom');
+                // animation small image into cart
+                let clonedImage = button.parentElement.firstElementChild.cloneNode(true);
+                clonedImage.classList.add('zoom');
+                navbarCenter.appendChild(clonedImage);
+                console.log(clonedElement);
             })
         })
     }

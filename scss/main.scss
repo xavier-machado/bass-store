@@ -2,7 +2,7 @@
 @import 'config';
 
 :root {
-  --primaryColor: #4285f4;
+  --primaryColor: #379683;
   --mainWhite: #fff;
   --mainBlack: #222;
   --mainGrey: #ececec;
@@ -22,6 +22,10 @@ body {
   color: var(--mainBlack);
   background: var(--mainWhite);
   font-family: 'Grenze', serif;
+}
+
+a{
+  text-decoration: none;
 }
 
 /* --------------- Navbar ---------------- */
@@ -155,9 +159,9 @@ body {
         .bag-btn:hover {
           color: var(--mainWhite);
         }
-        /* .fa-shopping-cart {
-          margin-right: 0.5rem;
-        } */
+        // .fa-shopping-cart {
+        //   margin-right: 0.5rem;
+        // }
         .img-container:hover .bag-btn {
           transform: translateX(0);
         }
@@ -252,30 +256,30 @@ body {
     grid-template-columns: auto 1fr auto;
     grid-column-gap: 1.5rem;
     margin: 1.5rem 0;
-  }
-  .cart-item img {
-    width: 75px;
-    height: 75px;
-  }
-  .cart-item h4 {
-    text-transform: capitalize;
-    letter-spacing: var(--mainSpacing);
-  }
-  .cart-item h5 {
-    margin: 0.5rem 0;
-    letter-spacing: var(--mainSpacing);
-  }
-  .item-amount {
-    text-align: center;
-  }
-  .remove-item {
-    color: red;
-    cursor: pointer;
-  }
-  .fa-plus,
-  .fa-minus {
-    color: var(--primaryColor);
-    cursor: pointer;
+    img {
+      width: 75px;
+      height: 75px;
+    }
+    h4 {
+      text-transform: capitalize;
+      letter-spacing: var(--mainSpacing);
+    }
+     h5 {
+      margin: 0.5rem 0;
+      letter-spacing: var(--mainSpacing);
+    }
+    .item-amount {
+      text-align: center;
+    }
+    .remove-item {
+      color: red;
+      cursor: pointer;
+    }
+    .fa-plus,
+    .fa-minus {
+      color: var(--primaryColor);
+      cursor: pointer;
+    }
   }
   /*---------- End of Cart Item -------------------- */
   
@@ -308,12 +312,18 @@ footer {
   }
 }
 /* --------------- End of Footer ---------------- */  
-
-
+/* --------------- Cart animation ---------------- */  
 .zoom {
   position: absolute;
-  top: 5px;
   right: 50%;
   width: 40px;
+  height: 40px;
   //opacity: 0;
+  animation: zoom 1s ease-in forwards;
+}
+
+@keyframes zoom {
+  0%{opacity: 0;}
+  50%{opacity: 1;}
+  100%{opacity: 0; right: 450px; }
 }

@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Grenze&display=swap");
 :root {
-  --primaryColor: #4285f4;
+  --primaryColor: #379683;
   --mainWhite: #fff;
   --mainBlack: #222;
   --mainGrey: #ececec;
@@ -19,6 +19,9 @@ body {
   color: var(--mainBlack);
   background: var(--mainWhite);
   font-family: 'Grenze', serif; }
+
+a {
+  text-decoration: none; }
 
 /* --------------- Navbar ---------------- */
 .navbar {
@@ -115,10 +118,7 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     grid-gap: 2rem; }
     .products .products-center .product {
-      box-shadow: 0 0 12px #aaa;
-      /* .fa-shopping-cart {
-          margin-right: 0.5rem;
-        } */ }
+      box-shadow: 0 0 12px #aaa; }
       .products .products-center .product .img-container {
         position: relative;
         overflow: hidden; }
@@ -219,30 +219,24 @@ body {
   grid-template-columns: auto 1fr auto;
   grid-column-gap: 1.5rem;
   margin: 1.5rem 0; }
-
-.cart-item img {
-  width: 75px;
-  height: 75px; }
-
-.cart-item h4 {
-  text-transform: capitalize;
-  letter-spacing: var(--mainSpacing); }
-
-.cart-item h5 {
-  margin: 0.5rem 0;
-  letter-spacing: var(--mainSpacing); }
-
-.item-amount {
-  text-align: center; }
-
-.remove-item {
-  color: red;
-  cursor: pointer; }
-
-.fa-plus,
-.fa-minus {
-  color: var(--primaryColor);
-  cursor: pointer; }
+  .cart-item img {
+    width: 75px;
+    height: 75px; }
+  .cart-item h4 {
+    text-transform: capitalize;
+    letter-spacing: var(--mainSpacing); }
+  .cart-item h5 {
+    margin: 0.5rem 0;
+    letter-spacing: var(--mainSpacing); }
+  .cart-item .item-amount {
+    text-align: center; }
+  .cart-item .remove-item {
+    color: red;
+    cursor: pointer; }
+  .cart-item .fa-plus,
+  .cart-item .fa-minus {
+    color: var(--primaryColor);
+    cursor: pointer; }
 
 /*---------- End of Cart Item -------------------- */
 .cart-footer {
@@ -282,8 +276,19 @@ footer {
     margin: 0 10px; }
 
 /* --------------- End of Footer ---------------- */
+/* --------------- Cart animation ---------------- */
 .zoom {
   position: absolute;
-  top: 5px;
   right: 50%;
-  width: 40px; }
+  width: 40px;
+  height: 40px;
+  animation: zoom 1s ease-in forwards; }
+
+@keyframes zoom {
+  0% {
+    opacity: 0; }
+  50% {
+    opacity: 1; }
+  100% {
+    opacity: 0;
+    right: 450px; } }
