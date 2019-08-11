@@ -50,12 +50,12 @@ class UI {
             <article class="product">
                 <div class="img-container">
                     <img src=${product.image} alt="product" class="product-img">
-                    <button class="bag-btn" data-id=${product.id}>
-                        <i class="fas fa-shopping-cart"></i>
-                    </button>
                 </div>
                 <h3>${product.title}</h3>
-                <h4>$${product.price}</h4>
+                <div class="product-info">
+                    <h4>$${product.price}</h4>
+                    <button class="bag-btn" data-id=${product.id}>add to cart</button>
+                </div>
             </article>
             `
         });
@@ -71,13 +71,11 @@ class UI {
             // let id = button.getAttribute('data-id'); // other way to get the id
             let id = button.dataset.id;
             let inCart = cart.find(item => item.id === id); // returns the first item that satisfy the condition
-            if (inCart) {
-                button.innerText = "In Cart";
-                button.disabled = true;
-            }
+            // if (inCart) {
+            //     button.innerText = "In Cart";
+            //     button.disabled = true;
+            // }
             button.addEventListener('click', event => {
-                event.target.innerText = "In Cart";
-                event.target.disabled = true;
                 // get product from products
                 let cartItem = { ...Storage.getProduct(id), amount: 1 }; // we're getting from dataset
                 // add product to the cart
@@ -91,10 +89,10 @@ class UI {
                 // show the cart
                 // this.showCart();
                 // animation small image into cart
-                let clonedImage = button.parentElement.firstElementChild.cloneNode(true);
+                let clonedImage = button.parentElement.previousElementSibling.firstElementChild.cloneNode(true);
                 clonedImage.classList.add('zoom');
                 navbarCenter.appendChild(clonedImage);
-                console.log(clonedElement);
+                setTimeout(() => navbarCenter.removeChild(clonedImage),1000);
             })
         })
     }
@@ -122,9 +120,9 @@ class UI {
             <span class="remove-item" data-id=${item.id}>remove</span>
         </div>
         <div>
-            <i class="fas fa-plus" data-id=${item.id}></i>
+            <img src="images/plus.png" data-id=${item.id} class="plus-sign">
             <p class="item-amount">${item.amount}</p>
-            <i class="fas fa-minus" data-id=${item.id}></i>
+            <img src="images/minus.png" data-id=${item.id} class="minus-sign">
         </div>`;
         cartContent.appendChild(div);
     }
@@ -163,7 +161,7 @@ class UI {
                 let id = removeItem.dataset.id;
                 cartContent.removeChild(removeItem.parentElement.parentElement);
                 this.removeItem(id);
-            } else if (event.target.classList.contains("fa-plus")) {
+            } else if (event.target.classList.contains("plus-sign")) {
                 let addAmount = event.target;
                 let id = addAmount.dataset.id;
                 let tempItem = cart.find(item => item.id === id);
@@ -171,7 +169,7 @@ class UI {
                 Storage.saveCart(cart);
                 this.setCartValues(cart);
                 addAmount.nextElementSibling.innerText = tempItem.amount;
-            } else if (event.target.classList.contains("fa-minus")) {
+            } else if (event.target.classList.contains("minus-sign")) {
                 let lowerAmount = event.target;
                 let id = lowerAmount.dataset.id;
                 let tempItem = cart.find(item => item.id === id);
@@ -203,9 +201,7 @@ class UI {
         cart = cart.filter(item => item.id !== id);
         this.setCartValues(cart);
         Storage.saveCart(cart);
-        let button = this.getSingleButton(id);
-        button.disabled = false;
-        button.innerHTML = `<i class="fas fa-shopping-cart"></i>`
+        // let button = this.getSingleButton(id);
     }
 
     getSingleButton(id) {
