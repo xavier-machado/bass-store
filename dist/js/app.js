@@ -10,7 +10,7 @@ const cartItems = document.querySelector('.cart-items');
 const cartTotal = document.querySelector('.cart-total');
 const cartContent = document.querySelector('.cart-content');
 const productsDOM = document.querySelector('.products-center');
-const body = document.querySelector('body');
+
 
 // cart
 let cart = [];
@@ -54,7 +54,7 @@ class UI {
                 <h3>${product.title}</h3>
                 <div class="product-info">
                     <h4>$${product.price}</h4>
-                    <button class="bag-btn" data-id=${product.id}>add to cart</button>
+                    <button class="bag-btn" data-id=${product.id}>shop now</button>
                 </div>
             </article>
             `
@@ -92,7 +92,7 @@ class UI {
                 let clonedImage = button.parentElement.previousElementSibling.firstElementChild.cloneNode(true);
                 clonedImage.classList.add('zoom');
                 navbarCenter.appendChild(clonedImage);
-                setTimeout(() => navbarCenter.removeChild(clonedImage),1000);
+                setTimeout(() => navbarCenter.removeChild(clonedImage), 1000);
             })
         })
     }
@@ -208,6 +208,40 @@ class UI {
         return buttonsDOM.find(button => button.dataset.id === id);
     }
 
+    showModal(products) {
+        const images = document.querySelectorAll('.product-img');
+        const modal = document.querySelector('.bg-modal');
+        const modalContent = document.querySelector('.modal-content')
+        const close = document.querySelector('.close');
+
+            images.forEach(image => {
+                // console.log(String(image.src).slice(-products[0].image.length))
+                for(let i = 0; i < products.length; i++){
+                    if(products[i].image == String(image.src).slice(-products[i].image.length)){
+                        var product = products[i];
+                    }
+                }
+                image.addEventListener('click', () => {
+                    modalContent.innerHTML += `
+                        <div>
+                            <img src=${product.image} alt="product">
+                        </div>
+                        <h3>${product.title}</h3>
+                        <div>
+                            <h4>$${product.price}</h4>
+                            <button data-id=${product.id}>shop now</button>
+                        </div>
+
+                    `
+                    modal.style.display = 'flex';
+                })
+            })
+
+        close.addEventListener('click', () => {
+            modal.style.display = 'none';
+        })
+    }
+
 }
 
 // local storage
@@ -244,6 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
     products.getProducts().then(products => {
         ui.displayProducts(products);
         Storage.saveProducts(products);
+        ui.showModal(products);
     }).then(() => {
         ui.getBagButtons();
         ui.cartLogic();

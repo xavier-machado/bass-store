@@ -5,7 +5,7 @@
       "fields": {
         "title": "fender mustang bass pf, olympic white",
         "price": 150,
-        "image": { "fields": { "file": { "url": "./images/product-1.jpg" } } }
+        "image": { "fields": { "file": { "url": "images/product-1.jpg" } } }
       }
     },
     {
@@ -13,7 +13,7 @@
       "fields": {
         "title": "fender mustang bass pf, torino red",
         "price": 200,
-        "image": { "fields": { "file": { "url": "./images/product-2.jpg" } } }
+        "image": { "fields": { "file": { "url": "images/product-2.jpg" } } }
       }
     },
     {
@@ -21,7 +21,7 @@
       "fields": {
         "title": "fender american performer jazz bass mn, penny",
         "price": 300,
-        "image": { "fields": { "file": { "url": "./images/product-3.jpg" } } }
+        "image": { "fields": { "file": { "url": "images/product-3.jpg" } } }
       }
     },
     {
@@ -29,7 +29,7 @@
       "fields": {
         "title": "fender fsr traditional 70s precision bass rw, arctic white",
         "price": 100,
-        "image": { "fields": { "file": { "url": "./images/product-4.jpg" } } }
+        "image": { "fields": { "file": { "url": "images/product-4.jpg" } } }
       }
     },
     {
@@ -37,7 +37,7 @@
       "fields": {
         "title": "fender deluxe active p bass special, mn, sunburst",
         "price": 500,
-        "image": { "fields": { "file": { "url": "./images/product-5.jpg" } } }
+        "image": { "fields": { "file": { "url": "images/product-5.jpg" } } }
       }
     }
   ]
