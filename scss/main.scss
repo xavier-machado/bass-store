@@ -354,25 +354,55 @@ footer {
   position: fixed;
   @include flexCentering;
   display: none;
-  z-index: 10;
 
   .modal-content {
       @include flexCentering;
-      width: 50vw;
-      height: 90vh;
-      color: #fff;
+      width: 60vw;
+      height: 60vh;
+      color: #000;
       border-radius: 4px;
       padding: 20px;
-      flex-direction: column;
       position: relative;
       animation: zoomIn .5s forwards;
       transition: top 0.4s, opacity 0.4s;
-      background: rgba(#222, $alpha: 1);
+      background: #fff;
 
-      .product-img{
-        width: 100px;
-        height: 100px;
+      .img-modal-container{
+        padding: 40px;
+        .modal-img {
+          width: 268.5px;
+          height: 268.5px;
+        }
       }
+      
+      .description {
+        display: grid;
+        grid-template-rows: repeat(4,0.5fr);
+
+        h3{
+          text-transform: capitalize;
+        }
+
+        h4{
+          font-size: 1.5rem;
+          color: var(--primaryColor);
+        }
+
+        a {
+          @include flexCentering;
+          @include mainButton;
+          height: 50px;
+          margin-top: 50px;
+        }
+
+        ul{
+          font-family: 'Times New Roman', Times, serif;
+          line-height: 1.5;
+          list-style: none;
+        }
+
+      }
+
       .close{
          position: absolute;
          top: 0;

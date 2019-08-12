@@ -33,19 +33,19 @@ class Products {
             let contentful = await client.getEntries({
                 content_type: "bassStore"
             });
-                console.log(contentful);
-                
+
             // JSON LOCAL FILE WAY
             // let result = await fetch('products.json');
             // let data = await result.json();
             // let products = data.items;
+
             let products = contentful.items;
             // destructuring the object that comes from json, not necesssary if the json is formated correctly
             products = products.map(item => {
-                const { title, price } = item.fields;
+                const { title, price, description } = item.fields;
                 const { id } = item.sys;
                 const image = item.fields.image.fields.file.url;
-                return { title, price, id, image };
+                return { title, price, id, image, description };
             })
             return products;
         } catch (error) {
@@ -104,10 +104,10 @@ class UI {
                 // show the cart
                 // this.showCart();
                 // animation small image into cart
-                let clonedImage = button.parentElement.previousElementSibling.firstElementChild.cloneNode(true);
-                clonedImage.classList.add('zoom');
-                navbarCenter.appendChild(clonedImage);
-                setTimeout(() => navbarCenter.removeChild(clonedImage), 1000);
+                // let clonedImage = button.parentElement.previousElementSibling.firstElementChild.cloneNode(true);
+                // clonedImage.classList.add('zoom');
+                // navbarCenter.appendChild(clonedImage);
+                // setTimeout(() => navbarCenter.removeChild(clonedImage), 1000);
             })
         })
     }
@@ -228,7 +228,6 @@ class UI {
         const modal = document.querySelector('.bg-modal');
         const modalContent = document.querySelector('.modal-content')
         const close = document.querySelector('.close');
-        console.log(close);
 
         images.forEach(image => {
             // console.log(String(image.src).slice(-products[0].image.length))
@@ -238,24 +237,35 @@ class UI {
                 }
             }
             image.addEventListener('click', () => {
+                let descriptionList = '';
+                for (let i = 0; i < product.description.split('\n').length; i++) {
+                    descriptionList += (`<li>${product.description.split('\n')[i]}</li>`)
+                }
                 modalContent.innerHTML += `
-                        <div>
-                            <img src=${product.image} class="product-img" alt="product">
+                        <div class="img-modal-container">
+                            <img src=${product.image} class="modal-img" alt="product">
                         </div>
-                        <h3>${product.title}</h3>
-                        <div>
+                        <div class="description">
+                            <h3>${product.title}</h3>
                             <h4>$${product.price}</h4>
-                            <button data-id=${product.id}>shop now</button>
+                            <ul>
+                                ${descriptionList}
+                            </ul>
+                            <a href="product.html?id=${product.id}" data-id=${product.id}>shop now</a>
                         </div>
-
                     `
                 modal.style.display = 'flex';
             })
         })
 
         close.addEventListener('click', () => {
-            console.log('tou')
+            modal.style.display = 'none';
         })
+    }
+
+    buildProductPage(){
+        const idProduct = document.location.search.replace(/^.*?\=/,)
+        console.log(idProduct);
     }
 
 }
@@ -298,6 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }).then(() => {
         ui.getBagButtons();
         ui.cartLogic();
+        ui.buildProductPage();
     });
 
 })

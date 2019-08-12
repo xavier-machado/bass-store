@@ -314,25 +314,56 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  display: none;
-  z-index: 10; }
+  display: none; }
   .bg-modal .modal-content {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50vw;
-    height: 90vh;
-    color: #fff;
+    width: 60vw;
+    height: 60vh;
+    color: #000;
     border-radius: 4px;
     padding: 20px;
-    flex-direction: column;
     position: relative;
     animation: zoomIn .5s forwards;
     transition: top 0.4s, opacity 0.4s;
-    background: #222222; }
-    .bg-modal .modal-content .product-img {
-      width: 100px;
-      height: 100px; }
+    background: #fff; }
+    .bg-modal .modal-content .img-modal-container {
+      padding: 40px; }
+      .bg-modal .modal-content .img-modal-container .modal-img {
+        width: 268.5px;
+        height: 268.5px; }
+    .bg-modal .modal-content .description {
+      display: grid;
+      grid-template-rows: repeat(4, 0.5fr); }
+      .bg-modal .modal-content .description h3 {
+        text-transform: capitalize; }
+      .bg-modal .modal-content .description h4 {
+        font-size: 1.5rem;
+        color: var(--primaryColor); }
+      .bg-modal .modal-content .description a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem 3rem;
+        text-transform: uppercase;
+        letter-spacing: var(--mainSpacing);
+        font-size: 1rem;
+        background: var(--mainBlack);
+        color: var(--mainWhite);
+        transition: var(--mainTransition);
+        border: none;
+        cursor: pointer;
+        outline: none;
+        height: 50px;
+        margin-top: 50px; }
+        .bg-modal .modal-content .description a:hover {
+          background: var(--primaryColor);
+          color: #fff; }
+      .bg-modal .modal-content .description ul {
+        font-family: 'Times New Roman', Times, serif;
+        line-height: 1.5;
+        list-style: none; }
     .bg-modal .modal-content .close {
       position: absolute;
       top: 0;
