@@ -1,3 +1,10 @@
+const client = contentful.createClient({
+    // This is the space ID. A space is like a project folder in Contentful terms
+    space: "fw1r9muewo8o",
+    // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
+    accessToken: "ueAdI8GaXHiaN4vwvPA91ppCAoxuXNizJDL4MdPbIVs"
+});
+
 // DOM var's
 
 const navbarCenter = document.querySelector('.navbar')
@@ -22,9 +29,17 @@ class Products {
 
     async getProducts() {
         try {
-            let result = await fetch('products.json');
-            let data = await result.json();
-            let products = data.items;
+
+            let contentful = await client.getEntries({
+                content_type: "bassStore"
+            });
+                console.log(contentful);
+                
+            // JSON LOCAL FILE WAY
+            // let result = await fetch('products.json');
+            // let data = await result.json();
+            // let products = data.items;
+            let products = contentful.items;
             // destructuring the object that comes from json, not necesssary if the json is formated correctly
             products = products.map(item => {
                 const { title, price } = item.fields;
@@ -213,18 +228,19 @@ class UI {
         const modal = document.querySelector('.bg-modal');
         const modalContent = document.querySelector('.modal-content')
         const close = document.querySelector('.close');
+        console.log(close);
 
-            images.forEach(image => {
-                // console.log(String(image.src).slice(-products[0].image.length))
-                for(let i = 0; i < products.length; i++){
-                    if(products[i].image == String(image.src).slice(-products[i].image.length)){
-                        var product = products[i];
-                    }
+        images.forEach(image => {
+            // console.log(String(image.src).slice(-products[0].image.length))
+            for (let i = 0; i < products.length; i++) {
+                if (products[i].image == String(image.src).slice(-products[i].image.length)) {
+                    var product = products[i];
                 }
-                image.addEventListener('click', () => {
-                    modalContent.innerHTML += `
+            }
+            image.addEventListener('click', () => {
+                modalContent.innerHTML += `
                         <div>
-                            <img src=${product.image} alt="product">
+                            <img src=${product.image} class="product-img" alt="product">
                         </div>
                         <h3>${product.title}</h3>
                         <div>
@@ -233,12 +249,12 @@ class UI {
                         </div>
 
                     `
-                    modal.style.display = 'flex';
-                })
+                modal.style.display = 'flex';
             })
+        })
 
         close.addEventListener('click', () => {
-            modal.style.display = 'none';
+            console.log('tou')
         })
     }
 

@@ -368,6 +368,11 @@ footer {
       animation: zoomIn .5s forwards;
       transition: top 0.4s, opacity 0.4s;
       background: rgba(#222, $alpha: 1);
+
+      .product-img{
+        width: 100px;
+        height: 100px;
+      }
       .close{
          position: absolute;
          top: 0;

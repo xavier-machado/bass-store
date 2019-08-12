@@ -330,6 +330,9 @@ footer {
     animation: zoomIn .5s forwards;
     transition: top 0.4s, opacity 0.4s;
     background: #222222; }
+    .bg-modal .modal-content .product-img {
+      width: 100px;
+      height: 100px; }
     .bg-modal .modal-content .close {
       position: absolute;
       top: 0;
