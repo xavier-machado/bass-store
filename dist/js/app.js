@@ -86,10 +86,7 @@ class UI {
             // let id = button.getAttribute('data-id'); // other way to get the id
             let id = button.dataset.id;
             let inCart = cart.find(item => item.id === id); // returns the first item that satisfy the condition
-            // if (inCart) {
-            //     button.innerText = "In Cart";
-            //     button.disabled = true;
-            // }
+            console.log(inCart);
             button.addEventListener('click', event => {
                 // get product from products
                 let cartItem = { ...Storage.getProduct(id), amount: 1 }; // we're getting from dataset
@@ -101,6 +98,11 @@ class UI {
                 this.setCartValues(cart);
                 // display cart item
                 this.addCartItem(cartItem);
+
+
+
+
+                /* CODE NOT IN USE RIGHT NOW */
                 // show the cart
                 // this.showCart();
                 // animation small image into cart
@@ -227,10 +229,11 @@ class UI {
         const images = document.querySelectorAll('.product-img');
         const modal = document.querySelector('.bg-modal');
         const modalContent = document.querySelector('.modal-content')
-        const close = document.querySelector('.close');
+        const btnsClose = document.querySelectorAll('.close');
+
+
 
         images.forEach(image => {
-            // console.log(String(image.src).slice(-products[0].image.length))
             for (let i = 0; i < products.length; i++) {
                 if (products[i].image == String(image.src).slice(-products[i].image.length)) {
                     var product = products[i];
@@ -258,15 +261,12 @@ class UI {
             })
         })
 
-        close.addEventListener('click', () => {
-            modal.style.display = 'none';
-        })
+        //EVENT LISTENER TO CLOSE MODAL
     }
 
-    buildProductPage(){
-        const idProduct = document.location.search.replace(/^.*?\=/,)
-        console.log(idProduct);
-    }
+    // buildProductPage(){
+    //     const idProduct = document.location.search.replace(/^.*?\=/,)
+    // }
 
 }
 
@@ -308,7 +308,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }).then(() => {
         ui.getBagButtons();
         ui.cartLogic();
-        ui.buildProductPage();
     });
 
 })
