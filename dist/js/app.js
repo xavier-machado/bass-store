@@ -7,7 +7,7 @@ const client = contentful.createClient({
 
 // DOM var's
 
-const navbarCenter = document.querySelector('.navbar')
+// const navbarCenter = document.querySelector('.navbar')
 const cartBtn = document.querySelector('.cart-btn');
 const closeCartBtn = document.querySelector('.close-cart');
 const clearCartBtn = document.querySelector('.clear-cart');
@@ -38,14 +38,13 @@ class Products {
             // let result = await fetch('products.json');
             // let data = await result.json();
             // let products = data.items;
-
             let products = contentful.items;
-            // destructuring the object that comes from json, not necesssary if the json is formated correctly
+            // since we're using contentful, the json file comes in a certain format, that we destructured below
             products = products.map(item => {
                 const { title, price, description } = item.fields;
                 const { id } = item.sys;
                 const image = item.fields.image.fields.file.url;
-                return { title, price, id, image, description };
+                return { title, price, description, id, image };
             })
             return products;
         } catch (error) {
@@ -87,7 +86,14 @@ class UI {
             let id = button.dataset.id;
             let inCart = cart.find(item => item.id === id); // returns the first item that satisfy the condition
             console.log(inCart);
+            if (inCart) {
+                button.innerText = "In Cart";
+                button.disabled = true;
+            }
             button.addEventListener('click', event => {
+                // disable button
+                event.target.innerText = "In Cart";
+                event.target.disabled = true;
                 // get product from products
                 let cartItem = { ...Storage.getProduct(id), amount: 1 }; // we're getting from dataset
                 // add product to the cart
@@ -149,6 +155,11 @@ class UI {
         cartDOM.classList.add('showCart');
     }
 
+    hideCart() {
+        cartOverlay.classList.remove('transparentBcg');
+        cartDOM.classList.remove('showCart');
+    }
+
     setupAPP() {
         cart = Storage.getCart();
         this.setCartValues(cart);
@@ -159,11 +170,6 @@ class UI {
 
     populateCart(cart) {
         cart.forEach(item => this.addCartItem(item));
-    }
-
-    hideCart() {
-        cartOverlay.classList.remove('transparentBcg');
-        cartDOM.classList.remove('showCart');
     }
 
     cartLogic() {
@@ -218,55 +224,16 @@ class UI {
         cart = cart.filter(item => item.id !== id);
         this.setCartValues(cart);
         Storage.saveCart(cart);
-        // let button = this.getSingleButton(id);
+        let button = this.getSingleButton(id);
+        button.disabled = false;
+        button.innerHTML = `shop now`;
     }
 
     getSingleButton(id) {
         return buttonsDOM.find(button => button.dataset.id === id);
     }
 
-    showModal(products) {
-        const images = document.querySelectorAll('.product-img');
-        const modal = document.querySelector('.bg-modal');
-        const modalContent = document.querySelector('.modal-content')
-        const btnsClose = document.querySelectorAll('.close');
-
-
-
-        images.forEach(image => {
-            for (let i = 0; i < products.length; i++) {
-                if (products[i].image == String(image.src).slice(-products[i].image.length)) {
-                    var product = products[i];
-                }
-            }
-            image.addEventListener('click', () => {
-                let descriptionList = '';
-                for (let i = 0; i < product.description.split('\n').length; i++) {
-                    descriptionList += (`<li>${product.description.split('\n')[i]}</li>`)
-                }
-                modalContent.innerHTML += `
-                        <div class="img-modal-container">
-                            <img src=${product.image} class="modal-img" alt="product">
-                        </div>
-                        <div class="description">
-                            <h3>${product.title}</h3>
-                            <h4>$${product.price}</h4>
-                            <ul>
-                                ${descriptionList}
-                            </ul>
-                            <a href="product.html?id=${product.id}" data-id=${product.id}>shop now</a>
-                        </div>
-                    `
-                modal.style.display = 'flex';
-            })
-        })
-
-        //EVENT LISTENER TO CLOSE MODAL
-    }
-
-    // buildProductPage(){
-    //     const idProduct = document.location.search.replace(/^.*?\=/,)
-    // }
+    // const idProduct = document.location.search.replace(/^.*?\=/,)
 
 }
 
@@ -299,12 +266,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // setup app
     ui.setupAPP();
-
     //get all products
     products.getProducts().then(products => {
         ui.displayProducts(products);
         Storage.saveProducts(products);
-        ui.showModal(products);
     }).then(() => {
         ui.getBagButtons();
         ui.cartLogic();
