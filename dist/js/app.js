@@ -7,7 +7,7 @@ const client = contentful.createClient({
 
 // DOM var's
 
-// const navbarCenter = document.querySelector('.navbar')
+const navbarCenter = document.querySelector('.navbar')
 const cartBtn = document.querySelector('.cart-btn');
 const closeCartBtn = document.querySelector('.close-cart');
 const clearCartBtn = document.querySelector('.clear-cart');
@@ -85,7 +85,6 @@ class UI {
             // let id = button.getAttribute('data-id'); // other way to get the id
             let id = button.dataset.id;
             let inCart = cart.find(item => item.id === id); // returns the first item that satisfy the condition
-            console.log(inCart);
             if (inCart) {
                 button.innerText = "In Cart";
                 button.disabled = true;
@@ -111,11 +110,6 @@ class UI {
                 /* CODE NOT IN USE RIGHT NOW */
                 // show the cart
                 // this.showCart();
-                // animation small image into cart
-                // let clonedImage = button.parentElement.previousElementSibling.firstElementChild.cloneNode(true);
-                // clonedImage.classList.add('zoom');
-                // navbarCenter.appendChild(clonedImage);
-                // setTimeout(() => navbarCenter.removeChild(clonedImage), 1000);
             })
         })
     }
