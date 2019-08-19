@@ -167,7 +167,7 @@ a {
           padding: 10px; }
     .products .products-center h3 {
       text-transform: capitalize;
-      font-size: 1.1rem;
+      font-size: 1rem;
       margin-top: 1rem;
       border-bottom: 1px #222 solid;
       border-top: 1px #222 solid;
@@ -199,6 +199,11 @@ a {
   padding: 1.5rem;
   transition: var(--mainTransition);
   transform: translateX(100%); }
+  .cart h2 {
+    text-transform: capitalize;
+    text-align: center;
+    letter-spacing: var(--mainSpacing);
+    margin-bottom: 2rem; }
 
 .showCart {
   transform: translateX(0); }
@@ -214,12 +219,6 @@ a {
 .close-cart {
   font-size: 1.7rem;
   cursor: pointer; }
-
-.cart h2 {
-  text-transform: capitalize;
-  text-align: center;
-  letter-spacing: var(--mainSpacing);
-  margin-bottom: 2rem; }
 
 /*---------- Cart Item -------------------- */
 .cart-item {
@@ -277,7 +276,7 @@ a {
 /* --------------- Footer ---------------- */
 footer {
   height: 5vh;
-  background: lightgreen;
+  background: lightskyblue;
   display: flex;
   align-items: center;
   justify-content: space-between;

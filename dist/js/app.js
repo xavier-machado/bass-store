@@ -7,7 +7,6 @@ const client = contentful.createClient({
 
 // DOM var's
 
-const navbarCenter = document.querySelector('.navbar')
 const cartBtn = document.querySelector('.cart-btn');
 const closeCartBtn = document.querySelector('.close-cart');
 const clearCartBtn = document.querySelector('.clear-cart');
@@ -103,11 +102,6 @@ class UI {
                 this.setCartValues(cart);
                 // display cart item
                 this.addCartItem(cartItem);
-
-
-
-
-                /* CODE NOT IN USE RIGHT NOW */
                 // show the cart
                 // this.showCart();
             })
