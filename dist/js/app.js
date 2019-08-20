@@ -16,6 +16,7 @@ const cartItems = document.querySelector('.cart-items');
 const cartTotal = document.querySelector('.cart-total');
 const cartContent = document.querySelector('.cart-content');
 const productsDOM = document.querySelector('.products-center');
+const productImg = document.querySelector('.product-img');
 
 
 // cart
@@ -56,13 +57,36 @@ class Products {
 // display products
 class UI {
 
+    // displaySingleProduct(products){
+
+    //     const idProduct = document.location.search.replace(/^.*?\=/,)
+    //     const singleProductDOM = document.querySelector('.singleproduct');
+
+    //     products.forEach(product => {
+    //         if(product.id == idProduct){
+    //             singleProductDOM.innerHTML = `
+    //             <article class="product">
+    //                 <div class="img-container">
+    //                     <a href="singleproduct.html?id=${product.id}"><img src=${product.image} alt="product" class="product-img"></a>
+    //                 </div>
+    //                 <h3>${product.title}</h3>
+    //                 <div class="product-info">
+    //                     <h4>$${product.price}</h4>
+    //                     <button class="bag-btn" data-id=${product.id}>shop now</button>
+    //                 </div>
+    //             </article>
+    //             `
+    //         }
+    //     })
+    // }
+
     displayProducts(products) {
         let result = '';
         products.forEach(product => {
             result += `
             <article class="product">
                 <div class="img-container">
-                    <img src=${product.image} alt="product" class="product-img">
+                    <a href="singleproduct.html?id=${product.id}"><img src=${product.image} alt="product" class="product-img"></a>
                 </div>
                 <h3>${product.title}</h3>
                 <div class="product-info">
@@ -220,8 +244,6 @@ class UI {
     getSingleButton(id) {
         return buttonsDOM.find(button => button.dataset.id === id);
     }
-
-    // const idProduct = document.location.search.replace(/^.*?\=/,)
 
 }
 
