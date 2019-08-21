@@ -57,28 +57,29 @@ class Products {
 // display products
 class UI {
 
-    // displaySingleProduct(products){
+    displaySingleProduct(products){
 
-    //     const idProduct = document.location.search.replace(/^.*?\=/,)
-    //     const singleProductDOM = document.querySelector('.singleproduct');
-
-    //     products.forEach(product => {
-    //         if(product.id == idProduct){
-    //             singleProductDOM.innerHTML = `
-    //             <article class="product">
-    //                 <div class="img-container">
-    //                     <a href="singleproduct.html?id=${product.id}"><img src=${product.image} alt="product" class="product-img"></a>
-    //                 </div>
-    //                 <h3>${product.title}</h3>
-    //                 <div class="product-info">
-    //                     <h4>$${product.price}</h4>
-    //                     <button class="bag-btn" data-id=${product.id}>shop now</button>
-    //                 </div>
-    //             </article>
-    //             `
-    //         }
-    //     })
-    // }
+        let idProduct = document.location.search.replace(/^.*?\=/,);
+        idProduct = idProduct.replace('undefined','')
+        console.log(idProduct);
+        const singleProductDOM = document.querySelector('.singleproduct');
+        products.forEach(product => {
+            if(product.id == idProduct){
+                singleProductDOM.innerHTML = `
+                <article class="product">
+                    <div class="img-container">
+                        <a href="singleproduct.html?id=${product.id}"><img src=${product.image} alt="product" class="product-img"></a>
+                    </div>
+                    <h3>${product.title}</h3>
+                    <div class="product-info">
+                        <h4>$${product.price}</h4>
+                        <button class="bag-btn" data-id=${product.id}>shop now</button>
+                    </div>
+                </article>
+                `
+            }
+        })
+    }
 
     displayProducts(products) {
         let result = '';
@@ -270,19 +271,29 @@ class Storage {
 
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const ui = new UI();
-    const products = new Products();
+if (document.URL.includes('index.html')){
+    document.addEventListener('DOMContentLoaded', () => {
+        const ui = new UI();
+        const products = new Products();
 
-    // setup app
-    ui.setupAPP();
-    //get all products
-    products.getProducts().then(products => {
-        ui.displayProducts(products);
-        Storage.saveProducts(products);
-    }).then(() => {
-        ui.getBagButtons();
-        ui.cartLogic();
-    });
-
-})
+        // setup app
+        ui.setupAPP();
+        //get all products
+        products.getProducts().then(products => {
+            ui.displayProducts(products);
+            Storage.saveProducts(products);
+        }).then(() => {
+            ui.getBagButtons();
+            ui.cartLogic();
+        });
+    })
+} else if(document.URL.includes('singleproduct.html')) {
+    document.addEventListener('DOMContentLoaded', () => {
+        const products = new Products();
+        const ui = new UI();
+        ui.setupAPP();
+        products.getProducts().then(products => {
+            ui.displaySingleProduct(products);
+        })
+    })
+}
