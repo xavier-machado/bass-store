@@ -58,27 +58,32 @@ class Products {
 class UI {
 
     displaySingleProduct(products) {
-
         let idProduct = document.location.search.replace(/^.*?\=/);
         idProduct = idProduct.replace('undefined', '')
-        console.log(idProduct);
         const singleProductDOM = document.querySelector('.singleproduct');
+        let result = '';
         products.forEach(product => {
             if (product.id == idProduct) {
-                singleProductDOM.innerHTML = `
-                <article class="product">
-                    <div class="img-container">
-                        <img src=${product.image} alt="product" class="product-img">
+                let descriptionList = '';
+                for (let i = 0; i < product.description.split('\n').length; i++) {
+                    descriptionList += (`<li>${product.description.split('\n')[i]}</li>`)
+                }
+                result += `
+                <article class="singleproduct">
+                    <div class="single-img">
+                        <img src=${product.image} alt="product" class="singleproduct-img">
                     </div>
-                    <h3>${product.title}</h3>
                     <div class="product-info">
+                        <h3>${product.title}</h3>
+                        <p>${descriptionList}</p>
                         <h4>$${product.price}</h4>
-                        <button class="bag-btn" data-id=${product.id}>shop now</button>
+                        <button class="bag-btn" data-id=${product.id}>add to cart</button>
                     </div>
                 </article>
                 `
             }
         })
+        singleProductDOM.innerHTML = result;
     }
 
     displayProducts(products) {
@@ -138,14 +143,14 @@ class UI {
         const button = document.querySelector('.bag-btn');
 
         let id = button.dataset.id;
-        let inCart = cart.find(item => item.id === id);
-        if(inCart){
-            button.innerText = "In Cart";
-            button.disabled = true;
-        }
+        // let inCart = cart.find(item => item.id === id);
+        // if(inCart){
+        //     button.innerText = "In Cart";
+        //     button.disabled = true;
+        // }
         button.addEventListener('click', event => {
-            event.target.innerText = "In cart";
-            event.target.disabled = true;
+            // event.target.innerText = "In cart";
+            // event.target.disabled = true;
             // get product from products
             let cartItem = { ...Storage.getProduct(id), amount: 1 };
             // ad product tot he cart

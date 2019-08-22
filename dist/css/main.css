@@ -175,6 +175,44 @@ a {
       padding: 10px; }
 
 /* ---------------End of Products ---------------- */
+/* ---------------Single product ---------------- */
+.singleproduct {
+  display: flex;
+  padding: 50px; }
+
+.single-img img {
+  width: 400px; }
+
+.product-info {
+  padding: 40px 10px 0px 100px; }
+  .product-info p {
+    font-size: 20px;
+    width: 75%;
+    padding-top: 10px; }
+  .product-info h3 {
+    text-transform: uppercase; }
+  .product-info h4 {
+    margin-top: 50px;
+    color: var(--primaryColor);
+    font-size: 35px; }
+  .product-info button {
+    padding: 1rem 3rem;
+    text-transform: uppercase;
+    letter-spacing: var(--mainSpacing);
+    font-size: 1rem;
+    background: var(--mainBlack);
+    color: var(--mainWhite);
+    transition: var(--mainTransition);
+    border: none;
+    cursor: pointer;
+    outline: none;
+    margin-top: 25px;
+    padding: 1rem 2rem; }
+    .product-info button:hover {
+      background: var(--primaryColor);
+      color: #fff; }
+
+/* ---------------End of Single Product ---------------- */
 /* --------------- Cart ---------------- */
 .cart-overlay {
   position: fixed;
