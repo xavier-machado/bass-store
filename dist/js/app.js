@@ -57,18 +57,18 @@ class Products {
 // display products
 class UI {
 
-    displaySingleProduct(products){
+    displaySingleProduct(products) {
 
-        let idProduct = document.location.search.replace(/^.*?\=/,);
-        idProduct = idProduct.replace('undefined','')
+        let idProduct = document.location.search.replace(/^.*?\=/);
+        idProduct = idProduct.replace('undefined', '')
         console.log(idProduct);
         const singleProductDOM = document.querySelector('.singleproduct');
         products.forEach(product => {
-            if(product.id == idProduct){
+            if (product.id == idProduct) {
                 singleProductDOM.innerHTML = `
                 <article class="product">
                     <div class="img-container">
-                        <a href="singleproduct.html?id=${product.id}"><img src=${product.image} alt="product" class="product-img"></a>
+                        <img src=${product.image} alt="product" class="product-img">
                     </div>
                     <h3>${product.title}</h3>
                     <div class="product-info">
@@ -92,7 +92,7 @@ class UI {
                 <h3>${product.title}</h3>
                 <div class="product-info">
                     <h4>$${product.price}</h4>
-                    <button class="bag-btn" data-id=${product.id}>shop now</button>
+                    <a href="singleproduct.html?id=${product.id}"><button class="bag-btn" data-id=${product.id}>shop now</button></a>
                 </div>
             </article>
             `
@@ -100,36 +100,65 @@ class UI {
         productsDOM.innerHTML = result;
     }
 
-    getBagButtons() {
-        // if we did it at the beggining , the products wouldn't yet be loaded
-        // const buttons = document.querySelectorAll('.bag-btn');
-        const buttons = [...document.querySelectorAll('.bag-btn')]; // the spread operator turns the nodelist into an array, you could use the nodelist since we're using forEach, but you can't use map, filter, reduce and some other on nodelists
-        buttonsDOM = buttons;
-        buttons.forEach(button => {
-            // let id = button.getAttribute('data-id'); // other way to get the id
-            let id = button.dataset.id;
-            let inCart = cart.find(item => item.id === id); // returns the first item that satisfy the condition
-            if (inCart) {
-                button.innerText = "In Cart";
-                button.disabled = true;
-            }
-            button.addEventListener('click', event => {
-                // disable button
-                event.target.innerText = "In Cart";
-                event.target.disabled = true;
-                // get product from products
-                let cartItem = { ...Storage.getProduct(id), amount: 1 }; // we're getting from dataset
-                // add product to the cart
-                cart = [...cart, cartItem];
-                // save cart in local storage
-                Storage.saveCart(cart);
-                // set cart values
-                this.setCartValues(cart);
-                // display cart item
-                this.addCartItem(cartItem);
-                // show the cart
-                // this.showCart();
-            })
+    // WHEN ADDING THE ITEM TO THE CART WAS ON ALL THE BUTTONS
+    // getBagButtons() {
+    //     // if we did it at the beggining , the products wouldn't yet be loaded
+    //     // const buttons = document.querySelectorAll('.bag-btn');
+    //     const buttons = [...document.querySelectorAll('.bag-btn')]; // the spread operator turns the nodelist into an array, you could use the nodelist since we're using forEach, but you can't use map, filter, reduce and some other on nodelists
+    //     buttonsDOM = buttons;
+    //     buttons.forEach(button => {
+    //         // let id = button.getAttribute('data-id'); // other way to get the id
+    //         let id = button.dataset.id;
+    //         let inCart = cart.find(item => item.id === id); // returns the first item that satisfy the condition
+    //         if (inCart) {
+    //             button.innerText = "In Cart";
+    //             button.disabled = true;
+    //         }
+    //         button.addEventListener('click', event => {
+    //             // disable button
+    //             event.target.innerText = "In Cart";
+    //             event.target.disabled = true;
+    //             // get product from products
+    //             let cartItem = { ...Storage.getProduct(id), amount: 1 }; // we're getting from dataset
+    //             // add product to the cart
+    //             cart = [...cart, cartItem];
+    //             // save cart in local storage
+    //             Storage.saveCart(cart);
+    //             // set cart values
+    //             this.setCartValues(cart);
+    //             // display cart item
+    //             this.addCartItem(cartItem);
+    //             // show the cart
+    //             // this.showCart();
+    //         })
+    //     })
+    // }
+
+    getBagButton() {
+        const button = document.querySelector('.bag-btn');
+
+        let id = button.dataset.id;
+        let inCart = cart.find(item => item.id === id);
+        if(inCart){
+            button.innerText = "In Cart";
+            button.disabled = true;
+        }
+        button.addEventListener('click', event => {
+            event.target.innerText = "In cart";
+            event.target.disabled = true;
+            // get product from products
+            let cartItem = { ...Storage.getProduct(id), amount: 1 };
+            // ad product tot he cart
+            cart = [...cart, cartItem];
+            // save cart in local storage
+            Storage.saveCart(cart);
+            // set cart values
+            this.setCartValues(cart);
+            // display cart item
+            this.addCartItem(cartItem);
+            // show the cart
+            // this.showCart();
+
         })
     }
 
@@ -271,10 +300,12 @@ class Storage {
 
 }
 
-if (document.URL.includes('index.html')){
+const ui = new UI();
+const products = new Products();
+
+
+if (document.URL.includes('index.html')) {
     document.addEventListener('DOMContentLoaded', () => {
-        const ui = new UI();
-        const products = new Products();
 
         // setup app
         ui.setupAPP();
@@ -287,13 +318,14 @@ if (document.URL.includes('index.html')){
             ui.cartLogic();
         });
     })
-} else if(document.URL.includes('singleproduct.html')) {
+} else if (document.URL.includes('singleproduct.html')) {
     document.addEventListener('DOMContentLoaded', () => {
-        const products = new Products();
-        const ui = new UI();
         ui.setupAPP();
         products.getProducts().then(products => {
             ui.displaySingleProduct(products);
+        }).then(() => {
+            ui.getBagButton();
+            ui.cartLogic();
         })
     })
 }
