@@ -309,28 +309,22 @@ const ui = new UI();
 const products = new Products();
 
 
-if (document.URL.includes('index.html')) {
-    document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
 
-        // setup app
-        ui.setupAPP();
-        //get all products
-        products.getProducts().then(products => {
+    // setup app
+    ui.setupAPP();
+    //get all products
+    products.getProducts().then(products => {
+        if (document.URL.includes('index.html')) {
             ui.displayProducts(products);
-            Storage.saveProducts(products);
-        }).then(() => {
-            ui.getBagButtons();
-            ui.cartLogic();
-        });
-    })
-} else if (document.URL.includes('singleproduct.html')) {
-    document.addEventListener('DOMContentLoaded', () => {
-        ui.setupAPP();
-        products.getProducts().then(products => {
+        } else if (document.URL.includes('singleproduct.html')) {
             ui.displaySingleProduct(products);
-        }).then(() => {
+        }
+        Storage.saveProducts(products);
+    }).then(() => {
+        if (document.URL.includes('singleproduct.html')) {
             ui.getBagButton();
-            ui.cartLogic();
-        })
-    })
-}
+        }
+        ui.cartLogic();
+    });
+})
