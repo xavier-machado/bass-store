@@ -220,22 +220,23 @@ a{
 
   .single-img{
     img{
-      width: 400px;
+      width: 650px;
     }
   }
 
   .product-info {
-    padding: 40px 10px 0px 100px;
-    p{
+    padding: 40px 10px 0px 300px;
+    li{
       font-size: 20px;
       width: 75%;
       padding-top: 10px;
     }
     h3{
+      font-size: 30px;
       text-transform: uppercase;
     }
     h4{
-      margin-top: 50px;
+      margin-top: 150px;
       color: var(--primaryColor);
       font-size: 35px;
     }
@@ -357,10 +358,17 @@ footer {
   align-items: center;
   justify-content: space-between;
   font-weight: 600;
+  
 
   p{
     margin: 0 10px;
   }
+}
+.singleFooter{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 /* --------------- End of Footer ---------------- */  
 /* --------------- Modal Section ---------------- */  

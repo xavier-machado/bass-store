@@ -181,18 +181,19 @@ a {
   padding: 50px; }
 
 .single-img img {
-  width: 400px; }
+  width: 650px; }
 
 .product-info {
-  padding: 40px 10px 0px 100px; }
-  .product-info p {
+  padding: 40px 10px 0px 300px; }
+  .product-info li {
     font-size: 20px;
     width: 75%;
     padding-top: 10px; }
   .product-info h3 {
+    font-size: 30px;
     text-transform: uppercase; }
   .product-info h4 {
-    margin-top: 50px;
+    margin-top: 150px;
     color: var(--primaryColor);
     font-size: 35px; }
   .product-info button {
@@ -321,6 +322,12 @@ footer {
   font-weight: 600; }
   footer p {
     margin: 0 10px; }
+
+.singleFooter {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%; }
 
 /* --------------- End of Footer ---------------- */
 /* --------------- Modal Section ---------------- */
